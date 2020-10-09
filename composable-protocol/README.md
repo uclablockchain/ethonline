@@ -8,9 +8,12 @@
    cd ethonline
    npm install
    ```
- - Save your testnet mnemonic and infura key into `.env`:
+ - create `.env`:
  - ```bash
    # contents of .env
+   APPLICATION_ID="pocket network app id"
+   ARCHIVAL_URL="pocket network archival gateway"
+   MAINNET_URL="pocket network mainnet gateway"
    INFURA_KEY="abcdefghijklmnop"
    MNEMONIC="this is not actually a valid mnemonic but it should make sense"
    ```
