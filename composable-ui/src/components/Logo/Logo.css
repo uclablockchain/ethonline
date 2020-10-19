@@ -9,7 +9,7 @@
 .logo-container .inside {
 	position: relative;
 	background: #2B3341;
-	z-index: 20;
+	z-index: 1;
 	color: white;
 	font-size: 48px;
 	line-height: 1;
@@ -24,7 +24,7 @@
     background: conic-gradient(blue, magenta, magenta, magenta, blue) ;
 	height: 50px;
 	width: 50px;
-	z-index: 10;
+	z-index: 0;
 }
 
 
@@ -37,5 +37,5 @@
     background: conic-gradient(magenta, blue, magenta, blue, magenta) ;
 	height: 50px;
 	width: 50px;
-	z-index: 10;
+	z-index: 0;
 }
