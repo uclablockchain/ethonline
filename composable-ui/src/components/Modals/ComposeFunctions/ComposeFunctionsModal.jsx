@@ -1,75 +1,115 @@
-import React from 'react';
-import Modal from 'react-modal';
-import * as S from './ComposeFunctionsModal-Style.js';
+import React, { useState } from "react";
+import Modal from "react-modal";
+import { checkTypes } from "../..//../utils/common.js";
+import * as S from "./ComposeFunctionsModal-Style.js";
 
-Modal.setAppElement('#root')
-const ComposeFunctionsModal = (props) => {
+Modal.setAppElement("#root");
+const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, returnFunction}) => {
+  var singFunction = singleFunction;
+  const [inputs, setInputs] = useState([]);
+  const [err, setErr] = useState([]);
 
-    const callEth = async () => {
-        
+  const checkAndSubmitForm = async () => {
+    //checktypes(type, input);
+    var errs = [];
+    for(var i in inputs) {
+      var type = singFunction.inputs[i].type;
+      var input = inputs[i];
+      console.log({input, type})
+      if(checkTypes(type, input) == false){
+        console.log('errors');
+        errs[i] = true;
+      };
+      setErr(errs);
     }
+    if(errs.length == 0) {
+      returnFunction(inputs);
+    }
+  };
 
-    return (
-        <Modal isOpen={props.modalToggle}
-            onRequestClose={() => { props.toggleModal(false) }}
-            style={{
-                overlay: {
-                    backgroundColor: '#2B3341',
-                    opacity: '98%'
-                },
-                content: {
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#212429',
-                    minHeight: '300px',
-                    maxWidth: '50%',
-                    minWidth: '30%',
-                    borderRadius: '30px',
-                    borderColor: 'transparent',
-                    margin: 'auto'
-                }
-            }}>
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
-
-
-                {props.formData.composedFunctionJson != null &&
-                    <S.FormTitle>{props.formData.composedFunctionJson.name} <br /> Function Inputs</S.FormTitle>
-                }
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', margin: '5px' }}>
-
-
-                    {props.formData.composedFunctionJson != null &&
-                        props.formData.composedFunctionJson.inputs.map((item, index) => {
-
-                            return (
-                                <S.InputContainer style={{ margin: '10px' }}>
-                                    <S.InputLabel>
-                                        {item.name} - {item.type}
-                                    </S.InputLabel>
-                                    <S.InputWrappers>
-                                        <S.StyledInput
-                                        //value={formData.contractAddress} 
-                                        //onFocus={()=>{setFormData({...formData, error: false})}} 
-                                        //onChange={ (e) => { setFormData({...formData, contractAddress: e.target.value})}} 
-                                        />
-                                    </S.InputWrappers>
-                                    <S.InputError //error={formData.error}
-                                    >
-                                        Error: Please enter a valid input. Visit <span><S.LinkTo href="https://etherscan.io/">Etherscan</S.LinkTo></span> for details.
-                                            </S.InputError>
-                                </S.InputContainer>
-                            )
-                        })
-
-                    }
+  return (
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={() => {
+        modalFunction();
+      }}
+      style={{
+        overlay: {
+          backgroundColor: "#2B3341",
+        },
+        content: {
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          backgroundColor: "#212429",
+          minHeight: "300px",
+          maxWidth: "40%",
+          minWidth: "30%",
+          borderRadius: "30px",
+          borderColor: "transparent",
+          margin: "auto",
+        },
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          alignItems: "center",
+        }}
+      >
+        {singleFunction && 
+          <S.FormTitle>
+            {singleFunction.name} <br /> Function Inputs
+          </S.FormTitle>
+      } 
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            margin: "5px",
+          }}
+        >
+          {singleFunction != null &&
+            singleFunction.inputs.map((item, index) => {
+              return (
+                <div>
+                  <S.InputContainer style={{ margin: "10px" }} key={index}>
+                    <S.InputLabel>
+                      {item.name} - {item.type}
+                    </S.InputLabel>
+                    <S.InputWrappers>
+                      <S.StyledInput
+                        value={inputs[index] == undefined ? "" : inputs[index]}
+                        onChange={(e) => {
+                          var x = [...inputs];
+                          x[index] = e.target.value;
+                          setInputs(x);
+                        }}
+                        onFocus={() => {
+                          var x = [...err];
+                          x[index] = false;
+                          setErr(x);
+                        }}
+                      />
+                    </S.InputWrappers>
+                  </S.InputContainer>
+                  <S.InputError error={err[index]}>Invalid Input.</S.InputError>
                 </div>
-                <S.StyledButton onClick={callEth} color="rgba(21, 61, 111, 0.44)">
-                    Call
-                </S.StyledButton>
-            </div>
-        </Modal>
-    )
-}
+              );
+            })}
+        </div>
+        <S.StyledButton
+          onClick={checkAndSubmitForm}
+          color="rgba(21, 61, 111, 0.44)"
+        >
+          Add to Composer
+        </S.StyledButton>
+      </div>
+    </Modal>
+  );
+};
 
-export default ComposeFunctionsModal
+export default ComposeFunctionsModal;

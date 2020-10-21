@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-
+import {motion} from 'framer-motion';
 
 export const Container = styled.div`
     height: 100vh;
     background-color: #2B3341;
     margin: 0;
     padding: 0;
+    padding-bottom: 100px;
 `;
 
 export const Header = styled.h1`
@@ -34,18 +35,19 @@ export const ComposeWrapper = styled.div`
 export const StepWrapper = styled.div`
     color: white;
     margin-left: 20px;
-    max-width: 420px;
-    min-width: 420px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex-grow: 1;
 `;
 
 export const StepTitle = styled.h1`
     margin-bottom: 5px;
 `;
 
-export const StepDescription = styled.p``;
+export const StepDescription = styled.p`
+    width: 420px;
+`;
 
 export const FormCard = styled.div`
     min-width: 550px;
@@ -55,7 +57,7 @@ export const FormCard = styled.div`
     border-radius: 30px;
     flex-direction: column;
     margin-bottom: 30px;
-    margin: 0 auto 0 250px;
+    margin: 0 25% 0 250px;
 
     @media only screen and (max-width: 768px) {
         margin: 0 auto 20px auto;
@@ -149,4 +151,16 @@ export const TempContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+`;
+
+export const FloatingButton = styled(motion.button)`
+    height: 100px;
+    width: 300px;
+    margin-left: 250px;
+    background-color: rgba(21, 61, 111, 0.44);
+    border-radius: 30px;
+    border-style: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
 `;

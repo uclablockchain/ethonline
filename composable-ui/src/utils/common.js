@@ -58,5 +58,26 @@ const getWeb3 = () =>
     });
 });
 
+const checkTypes = (type, input) => {
+  
+  switch(type){
+    case 'uint':
+    case 'uint8':
+    case 'uint16':
+    case 'uint160':
+    case 'uint128':
+    case 'uint256':
+      return !isNaN(input)
+    case 'address':
+      return Web3.utils.isAddress(input)
+    case 'bool':
+      if(input.toLowerCase() === 'true' || input.toLowerCase() === 'false'){return true}
+      else{return false}
+    case 'bytes':
+      return Web3.utils.isHex(input)
+    default:
+      return true
+  }
+}
 
-  export  {GenericAPICall, hasMetaMask, getWeb3};
+  export  {GenericAPICall, hasMetaMask, getWeb3, checkTypes};

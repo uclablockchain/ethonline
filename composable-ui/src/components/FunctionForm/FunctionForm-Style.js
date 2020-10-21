@@ -1,25 +1,8 @@
 import styled from 'styled-components';
+import {motion} from 'framer-motion';
 
 
-export const Container = styled.div`
-    height: 100vh;
-    background-color: #2B3341;
-    margin: 0;
-    padding: 0;
-`;
-
-export const Header = styled.h1`
-    color: white;
-`
-
-export const Body = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-`;
-
-export const ComposeWrapper = styled.div`
+export const ComposeWrapper = styled(motion.div)`
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -28,24 +11,24 @@ export const ComposeWrapper = styled.div`
     @media only screen and (max-width: 768px) {
         flex-direction: column;
     }
-
 `;
 
 export const StepWrapper = styled.div`
     color: white;
     margin-left: 20px;
-    max-width: 420px;
-    min-width: 420px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    flex-grow: 1;
 `;
 
 export const StepTitle = styled.h1`
     margin-bottom: 5px;
 `;
 
-export const StepDescription = styled.p``;
+export const StepDescription = styled.p`
+    width: 420px;
+`;
 
 export const FormCard = styled.div`
     min-width: 550px;
@@ -55,7 +38,7 @@ export const FormCard = styled.div`
     border-radius: 30px;
     flex-direction: column;
     margin-bottom: 30px;
-    margin: 0 auto 0 250px;
+    margin: 0 25% 0 250px;
 
     @media only screen and (max-width: 768px) {
         margin: 0 auto 20px auto;
@@ -97,7 +80,7 @@ export const InputLabel = styled.p`
 export const InputError = styled.p`
     color: red;
     font-size: 14px;
-    margin-left: 50px;
+    text-align: center;
     display: ${props => props.error ? 'block' : 'none'};
 `;
 
@@ -132,11 +115,19 @@ export const StyledButton = styled.button`
     font-size: 16px;
     font-weight: 500;
     align-self: center;
-    margin: auto 0px 10px 0px;
+    margin: auto 0px auto 0px;
 
     &:hover{
         background-color: rgba(21, 61, 111, 0.20)
     }
+`;
+
+export const EvenOut = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: auto;
 `;
 
 export const LinkTo = styled.a`

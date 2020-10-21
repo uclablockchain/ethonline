@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Web3 from 'web3';
 import { ethers } from 'ethers';
 import {GenericAPICall, getWeb3} from '../utils/common.js';
+import SimpleStorage from '../contracts/SimpleStorage.json';
 
 //0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984
 const Test = () => {
 
 
-    const [web3State, setWeb3State] = useState({
-        myWeb3: null,
-        accounts: null,
-        contract: null
-    })
-    const [w3, setW3] = useState(null);
+    const [web3Test, setWeb3Test] = useState(null);
+    const [account, setAccount] = useState(null);
 
     const [formData, setFormData] = useState({
         loading: false,
@@ -25,7 +22,7 @@ const Test = () => {
     });
 
     
-    const getFunctions = () => {
+    const getFunctions = async () => {
 
         var apiConfig = {
             method: 'GET',
@@ -33,12 +30,11 @@ const Test = () => {
             headers: {}
         }
 
-        GenericAPICall(apiConfig,
+        await GenericAPICall(apiConfig,
             (res) => {
                 var contractABI = ""
                 contractABI = JSON.parse(res.data.result);
                 if (contractABI) {
-
                     var functions = contractABI.filter(function (item) {
                         return item.type === "function"
                     })
@@ -52,58 +48,81 @@ const Test = () => {
     }
 
     const handleClick = async () => {
+
+        /*
+        const transactionParameters = {
+            to: '0xEe6170Ea31b014d479746A719A56ab7a3aF977ad',
+            from: account[0],
+            value: '0x01'
+        }
         
+
+        const txHash = await window.ethereum.request({
+            method: 'eth_sendTransaction',
+            params: [transactionParameters]
+        })
+        
+
+        console.log(txHash);
+        */
+
+        
+        await web3Test.eth.sendTransaction({
+            from: account[0],
+            to: '0xEe6170Ea31b014d479746A719A56ab7a3aF977ad',
+            value: web3Test.utils.toBN(web3Test.utils.toWei('1', 'ether'))
+        })
+        
+        
+        /*
+        var myContract = new web3Test.eth.Contract(formData.contractABI, "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984", {
+            from: "0x35C185B8036C7D96269e8410c6f7178Ae08812Cf",
+            gasPrice: '2000000000'
+        });
+
+        var mintSucks =  await myContract.methods.balanceOf('0x35C185B8036C7D96269e8410c6f7178Ae08812Cf').call()
+
+        console.log(mintSucks);
+        
+        */
+        /*
+        
+       const networkId = await web3Test.eth.net.getId();
+       const deployedNetwork = SimpleStorage.networks[networkId];
+
+       console.log({networkId, deployedNetwork})
+
+       
+       const contractInst = new web3Test.eth.Contract(
+           SimpleStorage.abi,
+           deployedNetwork && deployedNetwork.address
+       );
+
+       var called = await contractInst.methods.set(5).send({from: "0x35C185B8036C7D96269e8410c6f7178Ae08812Cf"});
+
+       const response = await contractInst.methods.get().call();
+
+       console.log(response);
+       
+        */
+
     }
 
     //  componentDidMount equivalent
     useEffect(() => {
-        
-        /*
-        async function connectWeb3() {
-            //  get network provider & web3 instance
-            try{
-                let web3;
-                if(window.ethereum){
-                    console.log('here1')
-                    web3 = new Web3(window.ethereum);
-                    await window.ethereum.enable();
-                    setW3(web3);
-                } else if (window.web3){
-                    //  the homie's legacy dapp browsers
-                    console.log('here2');
-                    web3 = new Web3(window.web3.currentProvider);
-                }
-            }
-            finally{
-                console.log('finally')
-            }
-
-            //  use web3 to get user account
-            //const accounts = await web3.eth.getAccounts();
-            //const networkId = await web3.eth.net.getId();
-        }
-        connectWeb3();
-        */
        async function truffle(){
         try {
             // Get network provider and web3 instance.
             await getFunctions();
-            const web3 = await getWeb3();
-      
+            var web3 = await getWeb3();
+            var account = await web3.eth.getAccounts();
+            setAccount(account);
+            setWeb3Test(web3);
             // Use web3 to get the user's accounts.
-            const accounts = await web3.eth.getAccounts();
-      
             // Get the contract instance.
-            const networkId = await web3.eth.net.getId();
-
-            /*
-            const instance = new web3.eth.Contract(
-              formData.contractABI,
-              "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
-            );
-            */
+            //const networkId = await web3.eth.net.getId();
+            //var contract = new web3.eth.Contract(formData.contractABI, "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984");
             
-      
             // Set web3, accounts, and contract to the state, and then proceed with an
             // example of interacting with the contract's methods.
             //this.setState({ web3, accounts, contract: instance }, this.runExample);
@@ -114,8 +133,7 @@ const Test = () => {
             );
             console.error(error);
           }
-       }
-       truffle();
+       } truffle();
         //getFunctions();
         
     }, [])
