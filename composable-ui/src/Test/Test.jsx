@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Web3 from 'web3';
 import { ethers } from 'ethers';
 import {GenericAPICall, getWeb3} from '../utils/common.js';
-import SimpleStorage from '../contracts/SimpleStorage.json';
 
 //0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984
 const Test = () => {

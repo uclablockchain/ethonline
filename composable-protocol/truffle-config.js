@@ -11,7 +11,7 @@
  * Save a mnemonic and an infura key into `.env`
  *
  */
-
+const path = require('path');
 require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
@@ -21,6 +21,7 @@ const ROPSTEN_URL = "https://ropsten.infura.io/v3/" + process.env.INFURA_KEY;
 const KOVAN_URL = "https://kovan.infura.io/v3/" + process.env.INFURA_KEY;
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "../composable-ui/src/contracts"),
   networks: {
     development: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, GANACHE_URL),
