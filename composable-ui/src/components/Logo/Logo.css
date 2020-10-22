@@ -8,9 +8,9 @@
 /*Composable*/
 .logo-container .inside {
 	position: relative;
-	background: #2B3341;
+	background: #f8f8f8;
 	z-index: 1;
-	color: white;
+	color: black;
 	font-size: 48px;
 	line-height: 1;
 	padding: 5px 10px;

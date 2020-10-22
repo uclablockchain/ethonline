@@ -14,7 +14,7 @@ export const ComposeWrapper = styled(motion.div)`
 `;
 
 export const StepWrapper = styled.div`
-    color: white;
+    color: black;
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -34,22 +34,22 @@ export const FormCard = styled.div`
     min-width: 550px;
     min-height: 400px;
     display: flex;
-    background-color: #212429; 
+    background-color: white; 
     border-radius: 30px;
     flex-direction: column;
     margin-bottom: 30px;
     margin: 0 25% 0 250px;
-
+    box-shadow: 0 3rem 6rem rgba(0, 0, 0, .1);
     @media only screen and (max-width: 768px) {
         margin: 0 auto 20px auto;
     }
 `;
 
 export const FormTitle = styled.h1`
-    color: white;
+    color: black;
     text-align: center;
     font-size: 45px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cousine';
     margin: 5px 0px 10px 0px;
     padding: 0;
     font-weight: 100;
@@ -72,7 +72,7 @@ export const InputContainer = styled.div`
 `;
 
 export const InputLabel = styled.p`
-    color: white;
+    color: black;
     margin-left: 20px;
     opacity: 80%;
 `;
@@ -91,7 +91,7 @@ export const StyledInput = styled.input`
     width: 450px;
     height: 30px;
     margin-left: 15px;
-    color: white;
+    color: black;
     font-size: 25px;
 `;
 
@@ -111,7 +111,7 @@ export const StyledButton = styled.button`
     align-items: center;
     cursor: pointer;
     background-color: ${props => props.color} ;
-    color: rgb(109, 168, 255);
+    color: white;
     font-size: 16px;
     font-weight: 500;
     align-self: center;

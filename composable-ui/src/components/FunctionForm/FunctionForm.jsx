@@ -4,7 +4,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import ComposeFunctionsModal from "../Modals/ComposeFunctions/ComposeFunctionsModal.jsx";
 
-
 const FunctionForm = ({functions, stepId, addToCallStack}) => {
 
   var fx = functions;
@@ -49,7 +48,7 @@ const FunctionForm = ({functions, stepId, addToCallStack}) => {
           value={selection}
           onChange={selectionChange}
           variant={"outlined"}
-          style={{ color: "white", opacity: "80%", width: "80%" }}
+          style={{ color: "black", opacity: "80%", width: "80%" }}
         >
           <MenuItem value="">
             <em>None</em>
@@ -68,11 +67,13 @@ const FunctionForm = ({functions, stepId, addToCallStack}) => {
           }}
           disabled={selection==""}
           style={{
-            color: "white",
+            color: "black",
+            opacity: selection == "" ? "50%":"100%",
             cursor: selection == "" ? "default" : "pointer",
-            fontFamily: "Poppins",
+            fontFamily: "Cousine",
             backgroundColor: 'transparent',
-            borderStyle: 'none'
+            borderStyle: 'none',
+            outline: 'none'
           }}
         >
           {"edit"}

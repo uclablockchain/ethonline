@@ -15,9 +15,7 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
     for(var i in inputs) {
       var type = singFunction.inputs[i].type;
       var input = inputs[i];
-      console.log({input, type})
       if(checkTypes(type, input) == false){
-        console.log('errors');
         errs[i] = true;
       };
       setErr(errs);
@@ -35,14 +33,14 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
       }}
       style={{
         overlay: {
-          backgroundColor: "#2B3341",
+          
         },
         content: {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
           backgroundColor: "#212429",
-          minHeight: "300px",
+          minHeight: "100px",
           maxWidth: "40%",
           minWidth: "30%",
           borderRadius: "30px",
@@ -61,8 +59,9 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
       >
         {singleFunction && 
           <S.FormTitle>
-            {singleFunction.name} <br /> Function Inputs
+            {singleFunction.name} <br /> <span style={{fontSize: '20px'}}>Function Inputs</span>
           </S.FormTitle>
+
       } 
         <div
           style={{
@@ -75,8 +74,8 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
           {singleFunction != null &&
             singleFunction.inputs.map((item, index) => {
               return (
-                <div>
-                  <S.InputContainer style={{ margin: "10px" }} key={index}>
+                <div key={index}>
+                  <S.InputContainer style={{ margin: "10px" }}>
                     <S.InputLabel>
                       {item.name} - {item.type}
                     </S.InputLabel>

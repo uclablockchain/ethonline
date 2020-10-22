@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./Contracts-Style.js";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { GenericAPICall, getWeb3 } from "../../utils/common.js";
@@ -9,9 +9,9 @@ import Logo from "../../components/Logo/Logo.jsx";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import FunctionForm from "../../components/FunctionForm/FunctionForm.jsx";
-import { formatMs } from "@material-ui/core";
 
-const Contracts = () => {
+
+const Contracts = ({ updateCallStack }) => {
   const [calls, setCalls] = useState([]);
   const [selectedFunction, setSelectedFunction] = React.useState("");
   const [modalToggle, toggleModal] = useState(false);
@@ -35,6 +35,8 @@ const Contracts = () => {
 		setCalls(x);
 
 		setSnackOpen(true);
+    
+    updateCallStack(formData.contractAddress, call);
 	}
 
   const [formData, setFormData] = useState({
@@ -57,7 +59,6 @@ const Contracts = () => {
     };
     setCalls([...calls, newCall]);
     setSnackOpen(true);
-    console.log(formData.functions[selectedFunction].name);
   };
 
   const getFunctions = () => {
@@ -93,7 +94,7 @@ const Contracts = () => {
       },
       (err) => {
         setFormData({ ...formData, error: true });
-        console.log(err);
+        console.error(err);
       }
     );
   };
@@ -159,15 +160,24 @@ const Contracts = () => {
         {formData.functions[0] !== null && (
 					<>
 					{functionForms.map((func, index) => {
-						return <FunctionForm functions={formData.functions} stepId={functionForms[index]} addToCallStack={loadCallStack}/>
+						return <FunctionForm functions={formData.functions} stepId={functionForms[index]} addToCallStack={loadCallStack} key={(index+formData.contractAddress)  }/>
 					})}
-					<S.FloatingButton onClick={() => {setForms([...functionForms, functionForms.length + 1])}} layout>
+
+				<S.BottomButtonWrapper>
+				<S.FloatingButton onClick={() => {setForms([...functionForms, functionForms.length + 1])}} layout>
 					Add Another Function
 				</S.FloatingButton>
+        <S.LinkWrapper to="/Composer">
+				<S.FloatingButton layout>
+					Finalize
+				</S.FloatingButton>
+        </S.LinkWrapper>
+				</S.BottomButtonWrapper>
+
 				</>
         )}
 
-        <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}>
+        <Snackbar open={snackOpen} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}>
           <Alert onClose={handleClose} severity="success">
             Function added to Composer.
           </Alert>
