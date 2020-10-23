@@ -6,7 +6,8 @@ import {Link} from 'react-router-dom';
 const Home = () => {
   return (
     <>
-    <Header />
+    {//<Header />
+    }
     <S.Content>
       <S.HeroText>
         It Shouldn't take a <br />rocket scientist <br /> to use DeFi.

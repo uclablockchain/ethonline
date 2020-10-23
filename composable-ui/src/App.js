@@ -1,14 +1,10 @@
-import React, {useState} from 'react';
-import './App.css';
-import Contracts from './pages/Contracts/Contracts.jsx';
-import Compose from './pages/Composed/Compose.jsx';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Home from './pages/Home/Home';
+import React, { useState } from "react";
+import "./App.css";
+import Contracts from "./pages/Contracts/Contracts.jsx";
+import Compose from "./pages/Composed/Compose.jsx";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Header from "./components/Header/Header.jsx";
 
 /*  Structure of a CallStack
   | Array
@@ -22,36 +18,35 @@ import Home from './pages/Home/Home';
 
 */
 function App() {
-
   const [calls, setCalls] = useState([]);
 
   const updateCalls = (contractAddress, call) => {
     var x = calls;
 
     //  no calls added yet. create a new one
-    if(x.length == 0) {
+    if (x.length == 0) {
       var newData = {
         contract: contractAddress,
-        callStack: [call]
-      }
+        callStack: [call],
+      };
       x.push(newData);
     } else {
       var added = false;
       //  check if this is an existing call, or a new call
-      for(var i in x){
+      for (var i in x) {
         //  handle the existing case
-        if(x[i].contract == contractAddress) {
+        if (x[i].contract == contractAddress) {
           added = true;
           x[i].callStack.push(call);
           break;
         }
       }
       //  handle the non existing case
-      if(added == false){
+      if (added == false) {
         var newData = {
           contract: contractAddress,
-          callStack: [call]
-        }
+          callStack: [call],
+        };
         //  add the new contract stack to state
         x.push(newData);
       }
@@ -59,22 +54,25 @@ function App() {
 
     //  finally, update the state.
     setCalls(x);
-  }
+  };
 
   //0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359
   return (
     <Router>
-      <Switch>
-      <Route exact path="/Composer">
-          <Compose callStack={calls}/>
-        </Route>
-        <Route exact path="/Builder">
-          <Contracts updateCallStack={updateCalls}/>
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/Composer">
+            <Compose callStack={calls} />
+          </Route>
+          <Route exact path="/Builder">
+            <Contracts updateCallStack={updateCalls} />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
     </Router>
   );
 }

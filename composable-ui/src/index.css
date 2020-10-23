@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
   background-color: transparent;
+  overscroll-behavior-y: none;
 }
 
 body::after {

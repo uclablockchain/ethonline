@@ -5,7 +5,7 @@ import MetaMaskButton from '../Buttons/MetaMask/MetaMaskButton.jsx';
 
 const Header = () => {
   return (
-    <S.Header onClick={()=>{console.log('test!')}}>
+    <S.Header>
       <Link to="/" style={{ textDecoration: "none" }}>
         <S.HeaderItem>
           Home

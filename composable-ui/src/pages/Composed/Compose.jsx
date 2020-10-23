@@ -201,7 +201,8 @@ const Compose = ({ callStack }) => {
 
   return (
     <>
-      <Header />
+      {//<Header />
+      }
       <S.Container
         initial={{ opacity: "3%" }}
         animate={{ opacity: "100%" }}

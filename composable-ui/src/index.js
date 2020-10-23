@@ -8,8 +8,8 @@ import { Provider } from "overmind-react";
 import config from "./overmind";
 
 const overmind = createOvermind(config, {
-  devtools: "localhost:3000",
-});
+  devtools: 'localhost:3000' // defaults to 'localhost:3031'
+})
 
 ReactDOM.render(
   <Provider value={overmind}>

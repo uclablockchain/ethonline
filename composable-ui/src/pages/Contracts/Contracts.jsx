@@ -100,7 +100,8 @@ const Contracts = ({ updateCallStack }) => {
 
   return (
     <>
-    <Header />
+    {//<Header />
+    }
     <S.Container>
       <S.FormCard initial={{opacity: 0, y: 1000}} transition={{opacity: 1, y: 0, duration: 0.5}} animate={{opacity: 1, y: 0, duration: 0.5}} layout>
         <S.FormTitle>Compose Contract</S.FormTitle>
