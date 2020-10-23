@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import './App.css';
 import Contracts from './pages/Contracts/Contracts.jsx';
 import Compose from './pages/Composed/Compose.jsx';
-import Test from './Test/Test.jsx';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import Home from './pages/Home/Home';
 
 /*  Structure of a CallStack
   | Array
-  | - Object of Name of Address
-  | -- Array of Objects which include id, functionABI, inputs
+  | - Call Stack Object
+  | ---- Contract Address
+  | ---- Array of Objects which include id, functionABI, inputs
 
   In order to push to global state, we prop drill the function down.
   We send the parent function the contract address we want to edit
@@ -67,8 +68,11 @@ function App() {
       <Route exact path="/Composer">
           <Compose callStack={calls}/>
         </Route>
-        <Route exact path="/">
+        <Route exact path="/Builder">
           <Contracts updateCallStack={updateCalls}/>
+        </Route>
+        <Route exact path="/">
+          <Home />
         </Route>
       </Switch>
     </Router>

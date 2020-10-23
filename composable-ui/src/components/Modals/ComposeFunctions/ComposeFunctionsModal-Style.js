@@ -1,75 +1,29 @@
 import styled from 'styled-components';
+import {motion} from 'framer-motion';
 
-
-export const Container = styled.div`
-    height: 100vh;
-    background-color: #2B3341;
-    margin: 0;
-    padding: 0;
-`;
-
-export const Header = styled.h1`
-    color: white;
-`
-
-export const Body = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-`;
-
-export const ComposeWrapper = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    flex-direction: row;
-    @media only screen and (max-width: 768px) {
-        flex-direction: column;
-    }
-
-`;
-
-export const StepWrapper = styled.div`
-    color: white;
-    margin-left: 20px;
-    max-width: 420px;
-    min-width: 420px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-`;
-
-export const StepTitle = styled.h1`
-    margin-bottom: 5px;
-`;
-
-export const StepDescription = styled.p``;
-
-export const FormCard = styled.div`
-    min-width: 550px;
-    min-height: 400px;
-    display: flex;
-    background-color: #212429; 
-    border-radius: 30px;
-    flex-direction: column;
-    margin-bottom: 30px;
-    margin: 0 auto 0 250px;
-
-    @media only screen and (max-width: 768px) {
-        margin: 0 auto 20px auto;
-    }
+export const FormCard = styled(motion.div)`
+  margin-top: 150px;
+  min-width: 550px;
+  min-height: 400px;
+  display: flex;
+  background-color: #35aaf9;
+  border-radius: 30px;
+  flex-direction: column;
+  margin-bottom: 30px;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  @media only screen and (max-width: 768px) {
+    margin: 0 auto 20px auto;
+  }
 `;
 
 export const FormTitle = styled.h1`
-    color: white;
-    text-align: center;
-    font-size: 45px;
-    font-family: 'Poppins', sans-serif;
-    margin: 5px 0px 10px 0px;
-    padding: 0;
-    font-weight: 100;
+  color: black;
+  text-align: center;
+  font-size: 45px;
+  font-family: "Cousine";
+  margin: 40px 0px 10px 0px;
+  padding: 0;
+  font-weight: 100;
 `;
 
 export const InputWrappers = styled.div`
@@ -82,14 +36,14 @@ export const InputContainer = styled.div`
     display: block;
     height: 95px;
     width: 500px;
-    border: 1px solid #2B2E35;
-    border-radius: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
     align-self: center;
     margin: 0 auto 0 auto;
 `;
 
 export const InputLabel = styled.p`
-    color: white;
+    color: black;
     margin-left: 20px;
     opacity: 80%;
 `;
@@ -108,12 +62,13 @@ export const StyledInput = styled.input`
     width: 450px;
     height: 30px;
     margin-left: 15px;
-    color: white;
+    color: black;
     font-size: 25px;
 `;
 
 export const StyledButton = styled.button`
-    padding: 18px;
+    padding: 25px 40px;
+    font-size: 1.5em;
     width: 80%;
     text-align: center;
     border-radius: 12px;
@@ -127,15 +82,15 @@ export const StyledButton = styled.button`
     -webkit-box-align: center;
     align-items: center;
     cursor: pointer;
-    background-color: ${props => props.color} ;
-    color: rgb(109, 168, 255);
-    font-size: 16px;
+    background-color: #35aaf9;
+    color: white;
     font-weight: 500;
     align-self: center;
     margin: auto 0px 10px 0px;
-
+    font-family: 'Cousine';
     &:hover{
-        background-color: rgba(21, 61, 111, 0.20)
+        background-color: white;
+        color: #35aaf9;
     }
 `;
 

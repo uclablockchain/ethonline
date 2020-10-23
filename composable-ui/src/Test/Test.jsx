@@ -68,7 +68,7 @@ const Test = () => {
         
         await web3Test.eth.sendTransaction({
             from: account[0],
-            to: '0xEe6170Ea31b014d479746A719A56ab7a3aF977ad',
+            to: '0x27FD6a90ed9C9a7B657328dF9425B1519479ae05',
             value: web3Test.utils.toBN(web3Test.utils.toWei('1', 'ether'))
         })
         

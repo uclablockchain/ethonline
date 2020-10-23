@@ -39,7 +39,8 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
-          backgroundColor: "#212429",
+          backgroundColor: "#EFF8FE",
+          color: "black",
           minHeight: "100px",
           maxWidth: "40%",
           minWidth: "30%",
@@ -102,7 +103,6 @@ const ComposeFunctionsModal = ({singleFunction, modalIsOpen, modalFunction, retu
         </div>
         <S.StyledButton
           onClick={checkAndSubmitForm}
-          color="rgba(21, 61, 111, 0.44)"
         >
           Add to Composer
         </S.StyledButton>

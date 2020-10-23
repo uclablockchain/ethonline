@@ -1,58 +1,29 @@
 import styled from 'styled-components';
 import {motion} from 'framer-motion';
 
-
-export const ComposeWrapper = styled(motion.div)`
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    flex-direction: row;
-    @media only screen and (max-width: 768px) {
-        flex-direction: column;
-    }
-`;
-
-export const StepWrapper = styled.div`
-    color: black;
-    margin-left: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 1;
-`;
-
-export const StepTitle = styled.h1`
-    margin-bottom: 5px;
-`;
-
-export const StepDescription = styled.p`
-    width: 420px;
-`;
-
-export const FormCard = styled.div`
-    min-width: 550px;
-    min-height: 400px;
-    display: flex;
-    background-color: white; 
-    border-radius: 30px;
-    flex-direction: column;
-    margin-bottom: 30px;
-    margin: 0 25% 0 250px;
-    box-shadow: 0 3rem 6rem rgba(0, 0, 0, .1);
-    @media only screen and (max-width: 768px) {
-        margin: 0 auto 20px auto;
-    }
+export const FormCard = styled(motion.div)`
+  margin-top: 150px;
+  min-width: 550px;
+  min-height: 400px;
+  display: flex;
+  background-color: #35aaf9;
+  border-radius: 30px;
+  flex-direction: column;
+  margin-bottom: 30px;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  @media only screen and (max-width: 768px) {
+    margin: 0 auto 20px auto;
+  }
 `;
 
 export const FormTitle = styled.h1`
-    color: black;
-    text-align: center;
-    font-size: 45px;
-    font-family: 'Cousine';
-    margin: 5px 0px 10px 0px;
-    padding: 0;
-    font-weight: 100;
+  color: white;
+  text-align: center;
+  font-size: 45px;
+  font-family: "Cousine";
+  margin: 40px 0px 10px 0px;
+  padding: 0;
+  font-weight: 100;
 `;
 
 export const InputWrappers = styled.div`
@@ -61,39 +32,13 @@ export const InputWrappers = styled.div`
 `;
 
 
-export const InputContainer = styled.div`
-    display: block;
-    height: 95px;
-    width: 500px;
-    border: 1px solid #2B2E35;
-    border-radius: 30px;
-    align-self: center;
-    margin: 0 auto 0 auto;
-`;
-
 export const InputLabel = styled.p`
-    color: black;
+    color: white;
     margin-left: 20px;
     opacity: 80%;
 `;
 
-export const InputError = styled.p`
-    color: red;
-    font-size: 14px;
-    text-align: center;
-    display: ${props => props.error ? 'block' : 'none'};
-`;
 
-export const StyledInput = styled.input`
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 450px;
-    height: 30px;
-    margin-left: 15px;
-    color: black;
-    font-size: 25px;
-`;
 
 export const StyledButton = styled.button`
     padding: 18px;
