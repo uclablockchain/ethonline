@@ -37,7 +37,7 @@ const MetaMaskButton = () => {
       account = account[0];
       actions.setAccount(account);
       actions.setWeb3(web3);
-      console.log(state.account);
+      console.log(state.web3);
       setIsConnected(true);
       setSnack({...snack, open: true, variant: 'success', message: 'MetaMask connected successfully.'})
     } else if(!window.ethereum) {
