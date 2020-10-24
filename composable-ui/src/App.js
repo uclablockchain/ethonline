@@ -20,9 +20,14 @@ import Header from "./components/Header/Header.jsx";
 function App() {
   const [calls, setCalls] = useState([]);
 
-  const updateCalls = (contractAddress, call) => {
-    var x = calls;
+  const updateCalls = (contractAddress, newCalls) => {
+    //var x = calls;
 
+    var newCall = {
+      contract: contractAddress,
+      callStack: newCalls
+    }
+    /*
     //  no calls added yet. create a new one
     if (x.length == 0) {
       var newData = {
@@ -50,9 +55,10 @@ function App() {
         x.push(newData);
       }
     }
-
+    */
     //  finally, update the state.
-    setCalls(x);
+    setCalls([...calls, newCall]);
+
   };
 
   //0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359

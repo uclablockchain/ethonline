@@ -34,8 +34,9 @@ const Contracts = ({ updateCallStack }) => {
     setCalls(x);
 
     setSnackOpen(true);
-
-    updateCallStack(formData.contractAddress, call);
+    console.log(calls);
+    //  update callstack will send all the state to app.js
+    //updateCallStack(formData.contractAddress, call);
   };
 
   const [formData, setFormData] = useState({
@@ -163,7 +164,7 @@ const Contracts = ({ updateCallStack }) => {
             >
               Add Another Function
             </S.FloatingButton>
-            <S.LinkWrapper to="/Composer">
+            <S.LinkWrapper to="/Composer" onClick={() => { updateCallStack(formData.contractAddress, calls)}}>
               <S.FloatingButton layout>Finalize</S.FloatingButton>
             </S.LinkWrapper>
           </S.BottomButtonWrapper>
