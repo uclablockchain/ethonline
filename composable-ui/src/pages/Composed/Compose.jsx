@@ -28,95 +28,19 @@ const Compose = ({ callStack }) => {
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
-  var callStack = [
-    {
-      contract: "0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359",
-      callStack: [
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "transferOwnership",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "notRealFunction",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-      ],
-    },
-    {
-      contract: "0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359",
-      callStack: [
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "transferOwnership",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "notRealFunction",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-      ],
-    },
-    {
-      contract: "0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359",
-      callStack: [
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "transferOwnership",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-        {
-          id: 1,
-          function: {
-            constant: true,
-            inputs: [{ name: "newOwner", type: "address" }],
-            name: "notRealFunction",
-            outputs: [],
-            type: "function",
-          },
-          inputs: ["0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359"],
-        },
-      ],
-    },
-  ];
 
   const encodeCallsFromState = (web3) => {
     var finalData = [];
     for (var item in callStack) {
+        /**
+        * @notice The data stored in callStack takes the form of an array:
+        * [{contractAddress: '...', funcName: '...', types: '...', inputs: '...'}, ...]
+        **/
       var contract = callStack[item].contract;
       var calls = callStack[item].callStack;
+
+      console.log(contract);
+      console.log(calls);
 
       var methodObject = {
         contractAddress: contract,
@@ -126,13 +50,13 @@ const Compose = ({ callStack }) => {
       for (var call in calls) {
         var func = calls[call].function;
         var parameters = calls[call].inputs
-        var formattedFunction = {
+        var jsonInterface = {
           name: func.name,
           type: func.type,
           inputs: func.inputs,
         };
-        var encoded = web3.eth.abi.encodeFunctionCall(formattedFunction, parameters).slice(2);
-        methodObject.calls.push(encoded);
+        var encoded = web3.eth.abi.encodeFunctionCall(jsonInterface, parameters);
+        methodObject.calls.push(encoded.slice(2));
       }
       finalData.push(methodObject);
     }
@@ -149,6 +73,12 @@ const Compose = ({ callStack }) => {
     if(web3){
       try{
         var encodedCalls = encodeCallsFromState(web3);
+
+        // var encodedData = ;
+        // for (encodedCall in encodedCalls) {
+        //     encodedData =
+        // }
+
         console.log(encodedCalls);
         setSnack({
           open: true,
@@ -162,7 +92,7 @@ const Compose = ({ callStack }) => {
           message: 'Encoding Error: One of your inputs may be invalid.'
         })
       }
-      
+
 
     } else {
       //make some sort of alert...
@@ -172,7 +102,7 @@ const Compose = ({ callStack }) => {
         message: "Web3 Error: MetaMask not connected."
       })
     }
-    
+
 
   };
 

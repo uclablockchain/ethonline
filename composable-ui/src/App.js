@@ -26,7 +26,6 @@ function App() {
     //  no calls added yet. create a new one
     if (x.length == 0) {
       var newData = {
-        contract: contractAddress,
         callStack: [call],
       };
       x.push(newData);
