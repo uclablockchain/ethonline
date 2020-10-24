@@ -1,4 +1,5 @@
 # ETHOnline 2020 Hackathon Submission
+See our work in progress slide deck: [Composable](https://docs.google.com/presentation/d/1DqcdvMo8MyyYLYujTmdrgap9y4DNbpG6AUtaYDm9be8/edit?usp=sharing)
 
 ## composable
 See [Encoding.md](https://github.com/uclablockchain/ethonline/blob/main/docs/Encoding.md) for our encoding standard. This is the smart contract backend of the composable project. Installation instructions are saved in its root folder.
