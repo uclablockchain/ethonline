@@ -6,14 +6,8 @@
 ## Install
  - Download & install
  - ```bash
-<<<<<<< HEAD
    git clone https://github.com/blockchainatucla/ethonline
    cd ./ethonline/composable
-=======
-   git clone
-   https://github.com/blockchainatucla/ethonline
-   cd ethonline
->>>>>>> 85ade81cca75841b35b0b938ef1044a2d58fa0d9
    npm install
    ```
 
@@ -29,10 +23,7 @@
    GANACHE_MNEMONIC=
    ```
  - Populate this file with your ganache mnemonic and your pocket network application ID
-<<<<<<< HEAD
  - Special thanks to [pocket network](https://www.pokt.network/) for providing access to their gateway endpoints!
-=======
->>>>>>> 85ade81cca75841b35b0b938ef1044a2d58fa0d9
 
 ## Set Up Development Blockchain
 Simply run:
