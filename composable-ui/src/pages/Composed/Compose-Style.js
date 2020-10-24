@@ -25,8 +25,8 @@ export const CardStack = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  justify-content: space-around;
   min-width: 400px;
   min-height: 200px;
   border-radius: 20px;
@@ -43,14 +43,18 @@ export const Card = styled.div`
 
 export const CardTitle = styled.h1`
   color: ${(props) => props.color || "black"};
-  font-size: 12px;
+  font-size: 16px;
+  margin: 10px 15px;
   align-self: center;
   font-family: "Cousine";
 `;
 
 export const CardDetails = styled.div`
-  margin-left: 15px;
   font-family: "Cousine";
+  display: flex;
+  flex-wrap: wrap;  
+  margin: 10px 15px;
+  max-width: 450px;
   &:last-child {
     margin-bottom: 15px;
   }
@@ -104,4 +108,20 @@ export const Header = styled.header`
   padding: 20px 0;
   align-items: center;
   width: 100%;
+`;
+
+export const SendButton = styled.button`
+  border-style: none;
+  outline: none;
+  padding: 15px 25px;
+  font-style: "Cousine";
+  font-size: 22px;
+  background-color: #35AAF9;
+  color: white;
+  max-width: 150px;
+  align-self: center;
+  border-radius: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  cursor: pointer;
 `;
