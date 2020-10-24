@@ -1,0 +1,6 @@
+POKT_ARCHIVAL_URL="https://eth-archival.gateway.pokt.network/v1/"
+POKT_MAINNET_URL="https://eth-mainnet.gateway.pokt.network/v1/"
+POKT_APPLICATION_ID=
+GANACHE_HOST="127.0.0.1"
+GANACHE_PORT=8545
+GANACHE_MNEMONIC=
