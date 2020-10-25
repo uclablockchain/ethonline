@@ -251,6 +251,7 @@ const Compose = ({ callStack }) => {
     }
     //  TODO: check if null && display error toast
     console.log(composedAndEncoded)
+    alert('Encoding sent to composable contract: ' + composedAndEncoded)
   };
 
   return (

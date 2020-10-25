@@ -10,7 +10,7 @@ const Home = () => {
     }
     <S.Content>
       <S.HeroText>
-        It Shouldn't take a <br />rocket scientist <br /> to use DeFi.
+        It shouldn't take a <br />rocket scientist <br /> to use DeFi.
       </S.HeroText>
       <img src="scientist-2.svg"
             alt="scientist working on computer"
