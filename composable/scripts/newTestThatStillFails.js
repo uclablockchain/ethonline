@@ -1,4 +1,4 @@
-const Composable = artifacts.require('Composable');
+const ComposableCaller = artifacts.require('ComposableCaller');
 const SimpleMessageStorage = artifacts.require('SimpleMessageStorage');
 
 
@@ -13,12 +13,6 @@ module.exports = async (callback) => {
   // get account
   var defaultAcct = await web3.eth.currentProvider.addresses[0];
 
-  // load composable contract
-  const composable = new web3.eth.Contract(Composable.abi, Composable.address);
-  const composableEncodeCall = Composable.abi[3];
-  const composableSendCall = Composable.abi[4];
-  const composableSingleCaller = await composable.methods.composableSingleCaller().call();
-  const composableMultiCaller = await composable.methods.composableMultiCaller().call();
 
   // load simpleMessageStorage contract
   const simpleMessageStorage = new web3.eth.Contract(SimpleMessageStorage.abi, SimpleMessageStorage.address);
@@ -28,7 +22,7 @@ module.exports = async (callback) => {
 
   console.log('--------------------------------------------------------------------------------');
   console.log('Using default account: ', defaultAcct);
-  console.log('Loaded: ', Composable.contractName, 'at: ', Composable.address);
+  console.log('Loaded: ', ComposableCaller.contractName, 'at: ', ComposableCaller.address);
   console.log('Loaded: ', SimpleMessageStorage.contractName, 'at: ', SimpleMessageStorage.address);
   // display the initial message before sending the tx
   let message = await simpleMessageStorage.methods.getMessage().call();
@@ -37,34 +31,49 @@ module.exports = async (callback) => {
 
 
   // this is the intended message to set within the composed tx
-  let theNewMessage = 'Ouch!';
-
+  let theNewMessage = 'Message 2';
+  // console.log(theNewMessage);
+  // process.exit();
   // encode the message using our encoding standard
   const regularData = await encodeFunctionCall(setMessage, [theNewMessage]);
-  let numBytes = ((regularData.length - 2) / 2) + 2;
-  console.log(regularData.length);
-  console.log(numBytes);
-  let size96 = await encodeParam('uint96', numBytes);
-  let speciallyEncoded = SimpleMessageStorage.address + size96.slice(42) + regularData.slice(2);
 
-  // console.log('New message to set: ', theNewMessage, '\n');
+  console.log(regularData);
+  let numBytes = ((regularData.length - 2) / 2);
+  let size64 = await encodeParam('uint64', numBytes);
+  
+  console.log('Anatomy of a calldata: ')  
+
+  let selector = regularData.slice(2, 10);
+  let calldataSize = size64.slice(50)
+  let data = regularData.slice(10);
+  let value = "0000000000000000000000000000000000000000000000000000000000000000";
+  
+  console.log('target address:\n', SimpleMessageStorage.address)
+  console.log('selector:\n', selector);
+  console.log('size :\n', calldataSize);
+  console.log('value:\n', value);
+  console.log('calldata: ')
+  console.log(data.slice(0, 64));
+  console.log(data.slice(64, 128));
+  console.log(data.slice(128), '\n');
+
+  let speciallyEncoded = SimpleMessageStorage.address + selector + calldataSize + value + data;
+
+  console.log('New message to set: ', theNewMessage, '\n');
   console.log("Typically encoded call: ", regularData, '\n');
   console.log('Composable encoded call: ', speciallyEncoded, '\n');
 
-  // process.exit();
-
-
-  let tx = {
-      "to": composableSingleCaller,
+  let tx = { 
+      "to": ComposableCaller.address,
       "from": defaultAcct,
-      "value": 0,
+      "value": value,
       "data": speciallyEncoded,
-      "gas": 1000000,
+      "gas": 10000000,
       "gasPrice": 20000000000
   };
 
   console.log("If the console is frozen here, then the tx failed for some reason.");
-
+//   console.log("We may possibly have to sign the transaction and send it as a raw tx, instead?");
   let response = await web3.eth.sendTransaction(tx);
   console.log('TxHash: ', response.transactionHash, '\n');
 

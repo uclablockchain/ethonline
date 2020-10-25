@@ -15,7 +15,7 @@ const ROPSTEN_URL = "https://ropsten.gateway.pokt.network/v1/" + process.env.APP
 const KOVAN_URL = "https://kovan.gateway.pokt.network/v1/" + process.env.APPLICATION_ID;
 
 module.exports = {
-  contracts_build_directory: path.join(__dirname, "../composable-ui/src/contracts"),
+  // contracts_build_directory: path.join(__dirname, "../composable-ui/src/contracts"),
   networks: {
     development: {
       provider: () => new HDWalletProvider(process.env.GANACHE_MNEMONIC, GANACHE_URL),
@@ -34,13 +34,13 @@ module.exports = {
   compilers: {
     solc: {
       version: "0.6.6",
-      // settings: {
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      settings: {
+       optimizer: {
+         enabled: false,
+         runs: 200
+       },
+       evmVersion: "byzantium"
+      }
     },
   },
 };
