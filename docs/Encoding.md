@@ -1,7 +1,7 @@
 # Composable Encoding Standard
 We aim to define a non-standard packed encoding for calling arbitrary functions with arbitrary function parameters, and we implement our specification of encoding and decoding arbitrary calldata by interrupting the standard function call process via `fallback` function, taking inspiration in particular from the [ERC-2535 Diamond Standard](https://eips.ethereum.org/EIPS/eip-2535). We use a tightly packed encoding, wasting no space and making one important assumption: **the length of any individual call within a composed chain of calls will not exceed the upper bound of a 64-bit unsigned integer**.
 
-![Image of Encoding](https://github.com/uclablockchain/ethonline/blob/main/docs/Composable.png)
+![Image of Encoding](https://github.com/uclablockchain/ethonline/blob/main/docs/Composable.pdf)
 
 ## Examining the Solidity Docs
 [Function Types](https://solidity.readthedocs.io/en/v0.7.4/types.html)
